@@ -9,9 +9,10 @@ add_executable(NN
         Include/NeuralNetwork/NeuralNetwork.h
         Src/Network/Layer.cpp
         Include/NeuralNetwork/Layer.h
-        Src/Utilities/Printer.cpp
-        Include/Utilities/Printer.h
         Src/Utilities/Random.cpp
         Include/Utilities/Random.h
         Src/Evolutionary/EvolutionSim.cpp
-        Include/Evolutionary/EvolutionSim.h)
+        Include/Evolutionary/EvolutionSim.h
+        Include/Utilities/Functions.h
+        Include/Utilities/Printer.h
+        Src/Utilities/Functions.cpp)

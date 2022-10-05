@@ -19,7 +19,7 @@ class NeuralNetwork {
 
     [[nodiscard]] std::vector<double> getOutput(std::vector<double> input) const;
 
-    [[nodiscard]] double calculateCost(std::vector<double> input, std::vector<double> expectedOutput) const;
+    [[nodiscard]] double calculateCost(const std::vector<double>& input, const std::vector<double>& expectedOutput) const;
 
     void mutate();
 

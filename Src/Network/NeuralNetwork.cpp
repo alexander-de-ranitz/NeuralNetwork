@@ -2,9 +2,9 @@
 // Created by alexander on 19-08-22.
 //
 #include "../../Include/NeuralNetwork/NeuralNetwork.h"
+#include "../../Include/Utilities/Functions.h"
 
 #include <stdexcept>
-#include <utility>
 
 std::vector<double> NeuralNetwork::getOutput(std::vector<double> input) const {
     for (auto& layer : layers) {
@@ -21,13 +21,9 @@ void NeuralNetwork::addLayers(std::vector<int> widths) {
     }
 }
 
-double NeuralNetwork::calculateCost(std::vector<double> input, std::vector<double> expectedOutput) const {
-    auto actualOutput = getOutput(std::move(input));
-    double error = 0.0;
-    for (int i = 0; i < expectedOutput.size(); ++i) {
-        error += (expectedOutput.at(i) - actualOutput.at(i)) * (expectedOutput.at(i) - actualOutput.at(i));
-    }
-    return error / static_cast<double>(expectedOutput.size());
+double NeuralNetwork::calculateCost(const std::vector<double>& input, const std::vector<double>& expectedOutput) const {
+    auto actualOutput = getOutput(input);
+    return functions::mse(expectedOutput, actualOutput);
 }
 
 void NeuralNetwork::mutate() {

@@ -7,7 +7,7 @@
 #include <cmath>
 #include <stdexcept>
 
-#include "../../Include/Utilities/Printer.h"
+#include "../../Include/Utilities/Functions.h"
 #include "../../Include/Utilities/Random.h"
 
 Layer::Layer(int inputSize_, int outputSize_) : inputSize(inputSize_), outputSize(outputSize_) {
@@ -37,12 +37,7 @@ std::vector<double> Layer::calculateOutput(const std::vector<double>& input) con
         }
     }
 
-    // Apply sigmoid #TODO: do this in a separate func etc.
-    for (auto& x : output) {
-        x = 1.0 / (1 + std::pow(M_E, -x));
-    }
-
-    return output;
+    return functions::sigmoid(output);
 }
 
 void Layer::mutateBiases() {
