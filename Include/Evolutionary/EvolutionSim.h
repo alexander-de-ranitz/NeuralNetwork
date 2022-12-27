@@ -25,7 +25,6 @@ class EvolutionSim {
     static std::vector<Organism> generateNewPopulation(const std::vector<Organism>& oldPopulation);
     void calculateFitness(std::vector<Organism>& pop);
     static void sort(std::vector<Organism>& pop);
-    static void storeOutput(const NeuralNetwork& neuralNetwork);
 
     const std::vector<int> networkShape;
     const Transformation targetFunction;
