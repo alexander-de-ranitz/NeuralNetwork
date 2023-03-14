@@ -13,6 +13,7 @@ namespace functions{
     enum class Activation{
         SIGMOID,
         RELU,
+        TANH,
         LINEAR
     };
 
@@ -26,11 +27,21 @@ namespace functions{
     double sigmoid_prime(double x);
     std::vector<double> sigmoid_prime(const std::vector<double>& input);
 
+    double tanh(double x);
+    std::vector<double> tanh(const std::vector<double>& input);
+
+    double tanh_prime(double x);
+    std::vector<double> tanh_prime(const std::vector<double>& input);
+
     double relu(double x);
     std::vector<double> relu(const std::vector<double>& input);
 
     double relu_prime(double x);
     std::vector<double> relu_prime(const std::vector<double>& input);
+
+    std::vector<double> softmax(const std::vector<double>& input);
+
+    double categoricalCrossEntropy(const std::vector<double>& actual, const std::vector<double>& expected);
 
     std::vector<double> diff_elem(const std::vector<double>& x, const std::vector<double>& y);
 

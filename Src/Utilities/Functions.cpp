@@ -14,7 +14,11 @@ namespace functions{
                 return sigmoid(input);
             case Activation::RELU:
                 return relu(input);
+            case Activation::TANH:
+                return tanh(input);
             case Activation::LINEAR:
+                return input;
+            default: // Should never happen: default case to suppress warnings
                 return input;
         }
     }
@@ -28,6 +32,19 @@ namespace functions{
         output.reserve(input.size());
         for (auto& x : input){
             output.emplace_back(sigmoid(x));
+        }
+        return output;
+    }
+
+    double tanh(double x){
+        return (std::pow(M_E, x) - std::pow(M_E, -x))/(std::pow(M_E, x) + std::pow(M_E, -x));
+    }
+
+    std::vector<double> tanh(const std::vector<double>& input){
+        std::vector<double> output;
+        output.reserve(input.size());
+        for (auto& x : input){
+            output.emplace_back(tanh(x));
         }
         return output;
     }
@@ -52,8 +69,12 @@ namespace functions{
                 return sigmoid_prime(input);
             case Activation::RELU:
                 return relu_prime(input);
+            case Activation::TANH:
+                return tanh_prime(input);
             case Activation::LINEAR:
                 return std::vector<double>(input.size(), 1.0);
+            default: // Should never happen: default case to suppress warnings
+                return std::vector<double>(input.size(), 0.0);
         }
     }
 
@@ -66,6 +87,19 @@ namespace functions{
         output.reserve(input.size());
         for (auto& x : input){
             output.emplace_back(sigmoid_prime(x));
+        }
+        return output;
+    }
+
+    double tanh_prime(double x){
+        return 1.0 - std::pow(tanh(x), 2);
+    }
+
+    std::vector<double> tanh_prime(const std::vector<double>& input){
+        std::vector<double> output;
+        output.reserve(input.size());
+        for (auto& x : input){
+            output.emplace_back(tanh_prime(x));
         }
         return output;
     }
@@ -83,6 +117,19 @@ namespace functions{
         return output;
     }
 
+    std::vector<double> softmax(const std::vector<double>& input) {
+        double sum = 0.0;
+        for (auto& x : input){
+            sum += std::pow(M_E, x);
+        }
+        std::vector<double> output;
+        output.reserve(input.size());
+        for (auto& x : input){
+            output.emplace_back(std::pow(M_E, x) / sum);
+        }
+        return output;
+    }
+
     /// Error functions
     double mse(const std::vector<double>& x, const std::vector<double>& y){
         if (x.size() != y.size())
@@ -93,6 +140,14 @@ namespace functions{
             error += (x[i] - y[i]) * (x[i] - y[i]);
         }
         return error / static_cast<double>(x.size());
+    }
+
+    double categoricalCrossEntropy(const std::vector<double>& actual, const std::vector<double>& expected){
+        double sum = 0.0;
+        for (unsigned long i = 0; i < actual.size(); i++) {
+            sum += - actual[i] * log(expected[i]);
+        }
+        return sum;
     }
 
     /// Utility functions
