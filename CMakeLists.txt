@@ -15,4 +15,6 @@ add_executable(NN
         Include/Evolutionary/EvolutionSim.h
         Include/Utilities/Functions.h
         Include/Utilities/Printer.h
-        Src/Utilities/Functions.cpp)
+        Src/Utilities/Functions.cpp
+        Include/Utilities/DataLoader.h
+        Src/Utilities/DataLoader.cpp)
