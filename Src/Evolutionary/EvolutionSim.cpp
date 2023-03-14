@@ -7,8 +7,8 @@
 #include "../../Include/Evolutionary/EvolutionSim.h"
 #include "../../Include/Utilities/Random.h"
 
-EvolutionSim::EvolutionSim(std::vector<int> networkShape_, std::function<std::vector<double>(std::vector<double>)> targetFunction_)
-    : networkShape(std::move(networkShape_)), targetFunction(std::move(targetFunction_)) {}
+EvolutionSim::EvolutionSim(std::vector<int> networkShape_)
+    : networkShape(std::move(networkShape_)) {}
 
 void EvolutionSim::runEvolution(int generations, int populationSize, std::vector<Data>& trainingData) {
     if (generations < 1 || populationSize < 1) throw std::invalid_argument("Invalid number of generations or populations size!");
